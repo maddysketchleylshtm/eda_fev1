@@ -4,24 +4,24 @@ library(tidyverse)
 
 # 2. loading data
 
-...    <- read_csv("fev1.csv")
+data<- read_csv("C:/Users/maddy/Documents/LSHTM/Second Term/Data Challenge/3 Report Writing/Session 3 Report Writing 1 - Exploratory Analysis/eda_fev1/fev1.csv")
 
-...$id <- factor(...$id)
+data$id <- factor(data$id)
 
 # 3a. correlation
 
 # for tidyverse users...
-summarise(..., r = ...)
+summarise(data, r = id)
 # but there are many ways to get this answer
 
 # Answer: <discuss linear model assumption>
 
 # 3b. make a scatter plot
 
-ggplot(data = ..., aes(x = ...,
-                       y = ...)) +
+ggplot(data = data, aes(x = age,
+                       y = FEV1)) +
     geom_point() +
-    xlab(...) + ...
+    xlab('Age of Patient') + ylab('FEV 1')
 
 # Answer: <discuss linear model assumption>
 
@@ -33,15 +33,22 @@ ggplot(data = ..., aes(x = ...,
 
 # 4a. how many?
 
+
 # count how many times each id appears
-counts <- ...
+id_unique<- unique(data$id)
+(number_of_unique2 <- length(id_unique))
+
+(number_of_unique<- n_distinct(data$id))
+
+counts<- data %>% count(id)
+
 # hint: dplyr has a function to do this, or you can use data.table, aggregate, 
 # or even a loop if you really needed to
 
 # then count how many times each count appears
 # could pre-calculate and do a geom_col() but geom_bar() does a count for us
-ggplot(data = counts, aes(x = ...)) +  # hint: factor on x variable
-    geom_bar() + ...
+ggplot(data = counts, aes(x = factor(id))) +  # hint: factor on x variable
+    geom_bar() ##+ ...
 
 # 4b. each individual's change over time
 
